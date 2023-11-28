@@ -71,6 +71,77 @@ export default class Game {
     piece.y = 0;
     piece.blocks = pieces[type];
 
-    return piece
+    return piece;
+  }
+
+  movePieceLeft() {
+    this.activePiece.x -= 1;
+
+    if (this.hasCollision()) {
+      this.activePiece += 1;
+
+      return false;
+    }
+
+    return true;
+  }
+
+  movePieceRight() {
+    this.activePiece.x += 1;
+
+    if (this.hasCollision()) {
+      this.activePiece -= 1;
+
+      return false;
+    }
+
+    return true;
+  }
+
+  movePieceDown() {
+    this.activePiece.y += 1;
+
+    if (this.hasCollision()) {
+      this.activePiece -= 1;
+      this.lockPiece();
+
+      return false;
+    }
+
+    return true;
+  }
+
+  lockPiece() {
+    const { x: left, y: top, blocks } = this.activePiece;
+
+    for (let y = 0; y < blocks.length; y++) {
+      for (let x = 0; x < blocks[y].length; y++) {
+        if (blocks[y][x]) {
+          this.playfield[top + y][left + x] = blocks[y][x];
+        }
+      }
+    }
+  }
+
+  hasCollision() {
+    const { x: left, y: top, blocks } = this.activePiece;
+
+    for (let y = 0; y < blocks.length; y++) {
+      for (let x = 0; x < blocks[y].length; x++) {
+        if (blocks[y][x]) {
+          if (this.playfield[top + y] === undefined) {
+            return true;
+          }
+          if (this.playfield[top + y][left + x] === undefined) {
+            return true;
+          }
+          if (this.playfield[top + y][left + x] !== 0) {
+            return true;
+          }
+        }
+      }
+    }
+
+    return false;
   }
 }
