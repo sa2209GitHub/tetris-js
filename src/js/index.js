@@ -11,5 +11,3 @@ const controller = new Controller(game, view);
 window.view = view;
 window.game = game;
 window.controller = controller;
-
-view.renderPlayfield(game.getState());
