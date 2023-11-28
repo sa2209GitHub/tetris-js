@@ -78,7 +78,7 @@ export default class Game {
     this.activePiece.x -= 1;
 
     if (this.hasCollision()) {
-      this.activePiece += 1;
+      this.activePiece.x += 1;
 
       return false;
     }
@@ -90,7 +90,7 @@ export default class Game {
     this.activePiece.x += 1;
 
     if (this.hasCollision()) {
-      this.activePiece -= 1;
+      this.activePiece.x -= 1;
 
       return false;
     }
@@ -102,7 +102,7 @@ export default class Game {
     this.activePiece.y += 1;
 
     if (this.hasCollision()) {
-      this.activePiece -= 1;
+      this.activePiece.y -= 1;
       this.lockPiece();
 
       return false;
@@ -115,7 +115,7 @@ export default class Game {
     const { x: left, y: top, blocks } = this.activePiece;
 
     for (let y = 0; y < blocks.length; y++) {
-      for (let x = 0; x < blocks[y].length; y++) {
+      for (let x = 0; x < blocks[y].length; x++) {
         if (blocks[y][x]) {
           this.playfield[top + y][left + x] = blocks[y][x];
         }
