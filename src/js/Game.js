@@ -74,6 +74,23 @@ export default class Game {
     return piece;
   }
 
+  getState() {
+    const { x: left, y: top, blocks } = this.activePiece;
+    const playfield = this.playfield.map((row) => [...row]);
+
+    for (let y = 0; y < blocks.length; y++) {
+      for (let x = 0; x < blocks[y].length; x++) {
+        if (blocks[y][x]) {
+          playfield[top + y][left + x] = blocks[y][x];
+        }
+      }
+    }
+
+    return {
+      playfield,
+    };
+  }
+
   movePieceLeft() {
     this.activePiece.x -= 1;
 
