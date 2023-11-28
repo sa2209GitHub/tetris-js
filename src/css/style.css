@@ -1,0 +1,19 @@
+body {
+  margin: 0;
+  background: black;
+}
+
+#root {
+  padding: 0;
+  text-align: center;
+}
+
+#root h1 {
+  font-family: "Press Start 2P", Ubuntu, monospace;
+  color: white;
+}
+
+#root canvas {
+  display: block;
+  margin: 0 auto;
+}
