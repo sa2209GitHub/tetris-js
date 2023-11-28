@@ -135,12 +135,12 @@ export default class Game {
 
     if (this.hasCollision()) {
       if (clockwise) {
-        this.rotatePiece(false)
+        this.rotatePiece(false);
       } else {
-        this.rotatePiece(true)
+        this.rotatePiece(true);
       }
 
-      return false
+      return false;
     }
 
     return true;
