@@ -60,7 +60,7 @@ export default class View {
   }
 
   renderBlock(x, y, width, height, color) {
-    this.context.fillStyle = color; 
+    this.context.fillStyle = color;
     this.context.strokeStyle = "black";
     this.context.lineWidth = 2;
 

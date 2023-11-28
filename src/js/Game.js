@@ -121,6 +121,7 @@ export default class Game {
     if (this.hasCollision()) {
       this.activePiece.y -= 1;
       this.lockPiece();
+      this.updatePieces();
 
       return false;
     }
@@ -165,6 +166,8 @@ export default class Game {
 
   dropPiece() {
     while (this.movePieceDown()) {}
+
+    return true;
   }
 
   lockPiece() {
@@ -177,6 +180,15 @@ export default class Game {
         }
       }
     }
+
+    return true;
+  }
+
+  updatePieces() {
+    this.activePiece = this.nextPiece;
+    this.nextPiece = this.getNextPiece();
+
+    return true;
   }
 
   hasCollision() {
