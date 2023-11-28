@@ -146,6 +146,10 @@ export default class Game {
     return true;
   }
 
+  dropPiece() {
+    while (this.movePieceDown()) {}
+  }
+
   lockPiece() {
     const { x: left, y: top, blocks } = this.activePiece;
 
