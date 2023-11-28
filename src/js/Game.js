@@ -111,6 +111,41 @@ export default class Game {
     return true;
   }
 
+  rotatePiece(clockwise = true) {
+    const { blocks } = this.activePiece;
+    const length = blocks.length - 1;
+
+    for (let y = 0; y < Math.floor((length + 1) / 2); y++) {
+      for (let x = y; x < length - y; x++) {
+        let temp = blocks[y][x];
+
+        if (clockwise) {
+          blocks[y][x] = blocks[length - x][y];
+          blocks[length - x][y] = blocks[length - y][length - x];
+          blocks[length - y][length - x] = blocks[x][length - y];
+          blocks[x][length - y] = temp;
+        } else {
+          blocks[y][x] = blocks[x][length - y];
+          blocks[x][length - y] = blocks[length - y][length - x];
+          blocks[length - y][length - x] = blocks[length - x][y];
+          blocks[length - x][y] = temp;
+        }
+      }
+    }
+
+    if (this.hasCollision()) {
+      if (clockwise) {
+        this.rotatePiece(false)
+      } else {
+        this.rotatePiece(true)
+      }
+
+      return false
+    }
+
+    return true;
+  }
+
   lockPiece() {
     const { x: left, y: top, blocks } = this.activePiece;
 
