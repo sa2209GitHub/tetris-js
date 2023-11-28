@@ -30,9 +30,14 @@ export default class View {
     this.element.appendChild(this.canvas);
   }
 
-  renderPlayfield({ playfield }) {
-    this.context.clearRect(0, 0, this.width, this.height);
+  render({ playfield }) {
+    this.clearScreen();
+    this.renderPlayfield(playfield);
 
+    return true;
+  }
+
+  renderPlayfield(playfield) {
     for (let y = 0; y < playfield.length; y++) {
       const line = playfield[y];
 
@@ -53,5 +58,13 @@ export default class View {
         }
       }
     }
+
+    return true;
+  }
+
+  clearScreen() {
+    this.context.clearRect(0, 0, this.width, this.height);
+
+    return true;
   }
 }
