@@ -1,7 +1,13 @@
 export default class Game {
+  static points = {
+    1: 40,
+    2: 100,
+    3: 300,
+    4: 1200,
+  };
+
   score = null;
   lines = null;
-  level = null;
 
   playfield = null;
   rows = null;
@@ -9,6 +15,10 @@ export default class Game {
 
   activePiece = null;
   nextPiece = null;
+
+  get level() {
+    return Math.floor(this.lines * 0.1);
+  }
 
   constructor(rows = 20, columns = 10) {
     this.rows = rows;
@@ -122,7 +132,9 @@ export default class Game {
     if (this.hasCollision()) {
       this.activePiece.y -= 1;
       this.lockPiece();
-      this.clearLines();
+
+      const clearedLines = this.clearLines();
+      this.updateScore(clearedLines);
       this.updatePieces();
 
       return false;
@@ -216,6 +228,15 @@ export default class Game {
     }
 
     return lines.length;
+  }
+
+  updateScore(clearedLines) {
+    if (clearedLines > 0) {
+      this.score += Game.points[clearedLines] * (this.level + 1);
+      this.lines += clearedLines;
+    }
+
+    return true
   }
 
   hasCollision() {
